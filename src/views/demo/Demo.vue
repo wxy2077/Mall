@@ -1,6 +1,8 @@
 <template>
     <div id="demo">
-        <h3> {{ $store.state.counter }} </h3>
+        <h1>Vuex练习学习</h1>
+
+        <h3>显示: {{ $store.state.counter }} </h3>
 
         <button @click="$store.commit('increment', 'aaa')">点击+</button>
 
@@ -45,5 +47,8 @@
 </script>
 
 <style scoped>
+    button{
+        margin: 10px;
+    }
 
 </style>

@@ -42,7 +42,7 @@
                 return this.$route.path.indexOf(this.path) !== -1
             },
             activeStyle() {
-                return this.isActive ? {'color': 'red'} : {}
+                return this.isActive ? {'color': '#ff5777'} : {}
             }
         }
     }
@@ -58,10 +58,6 @@
         color: #bfbfbf;
         background-color: #f6f6f6;
     }
-    /*.item, .item-icon{*/
-    /*color: #3f3f3f;*/
-    /*}*/
-
     .item-icon img, .item-active-icon img {
         width: 24px;
         height: 24px;

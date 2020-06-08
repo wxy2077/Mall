@@ -18,16 +18,19 @@
 <style scoped>
     .nav-bar{
         display: flex;
-        height: 0.9rem;
+        height: 43px;
         background-color: var(--color-tint);
         color: #fff;
     }
     .nav-center{
         flex: 1;
+        font-size: 16px;
+        line-height: 43px;
+        text-align: center;
     }
     .nav-left, .nav-right{
-        width: 0.9rem;
-        background-color: pink;
+        width: 50px;
+        /*background-color: pink;*/
     }
 
 
