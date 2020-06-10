@@ -27,7 +27,8 @@
         },
         methods:{
             clickItem(index){
-                this.currentIndex = index
+                this.currentIndex = index;
+                this.$emit('tabChange', index)
             }
         }
     }
