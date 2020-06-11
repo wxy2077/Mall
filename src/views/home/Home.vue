@@ -4,6 +4,12 @@
             <div slot="center" class="nav-bar-text">购物街</div>
         </nav-bar>
 
+        <tab-control v-show="isTabFixed"
+                     class="fixed"
+                     @tabChange="tabChange"
+                     ref="fixedTab"
+                     :tabItems="tabItems" />
+
         <scroll class="wrapper"
                 ref="scroll"
                 @scroll="scrollPosition"
@@ -22,7 +28,7 @@
                 <tab-control ref="tabControl"
                              :tabItems="tabItems"
                              @tabChange="tabChange"
-                             class="tab-control"/>
+                             />
 
                 <goods-list :tabGoods="tabGoodsList[tabIndex]" />
 
@@ -277,7 +283,8 @@
                 ],
                 tabIndex: 0,
                 scroll: null,
-                isShowBackTop: false
+                isShowBackTop: false,
+                isTabFixed: false,
             }
         },
         methods: {
@@ -288,21 +295,32 @@
             },
             // 滑动事件回调监听
             scrollPosition(pos) {
-                // window.console.log(pos.y);
-                if (pos.y < -900) {
-                    this.isShowBackTop = true
-                } else {
-                    this.isShowBackTop = false
-                }
+                // window.console.log(-pos.y);
+                // if (pos.y < -900) {
+                //     this.isShowBackTop = true
+                // } else {
+                //     this.isShowBackTop = false
+                // }
+                // 1 简写 判断是否显示返回顶部按钮
+                this.isShowBackTop = pos.y < -900;
+
+
+                // this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop
+                // 2 获取 tabControl 到顶的高度
+                this.isTabFixed = -pos.y >= this.$refs.tabControl.$el.offsetTop;
             },
             // tab-control切换事件回调
             tabChange(index){
                 // 接受当前tab control 切换goodsList
-                this.tabIndex = index
+                this.tabIndex = index;
+                // 统一两个子组件的下角标变量
+                this.$refs.tabControl.currentIndex = index;  // 滚动的tab
+                this.$refs.fixedTab.currentIndex = index;    // 固定的tab
+
             },
             // 滑动加载更多回调
             loadMore(){
-                window.console.log("上拉加载更多....", this.tabGoodsList[this.tabIndex].cate)
+                window.console.log("上拉加载更多....", this.tabGoodsList[this.tabIndex].cate);
 
                 // 必须得回调 finishPullUp方法才能下次加载更多
                 this.$refs.scroll.scroll.finishPullUp()
@@ -343,7 +361,6 @@
         top: 0;
         left: 0;
         right: 0;
-        z-index: 9;
 
     }
 
@@ -367,6 +384,14 @@
         overflow: hidden;
         background-color: #fff;
 
+    }
+
+    .fixed {
+        position: fixed;
+        top: 10px;
+        left: 0;
+        right: 0;
+        z-index: 999;
     }
 
 </style>
