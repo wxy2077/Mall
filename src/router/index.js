@@ -7,7 +7,6 @@ const Home = () => import('@/views/home/Home');
 const Category = () => import('@/views/category/Category');
 const Cart = () => import('@/views/shopcart/ShopCart');
 const Profile = () => import('@/views/profile/Profile');
-// const Detail = () => import('views/detail/Detail')
 
 // 1.安装VueRouter
 Vue.use(VueRouter);

@@ -3,9 +3,9 @@
         <h4>本周流行</h4>
         <div class="recommend-box">
             <div class="recommend-item" v-for="(item, index) in recommends" :key="index">
-                <a :href="item.link">
+                <a :href="'/' + item.cateId">
                     <img :src="item.image"/>
-                    <div class="item-text">{{ item.title }}</div>
+                    <div class="item-text">{{ item.cateName }}</div>
                 </a>
             </div>
         </div>

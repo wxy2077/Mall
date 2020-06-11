@@ -6,7 +6,7 @@
              @click="clickItem(index)"
              :class="{active: currentIndex === index}"
         >
-            <span>{{ item.title }}</span>
+            <span>{{ item.tabName }}</span>
         </div>
     </div>
 </template>

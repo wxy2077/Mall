@@ -24,7 +24,7 @@
                              @tabChange="tabChange"
                              class="tab-control"/>
 
-                <goods-list :tabGoods="tabGoodsList[tabIndex]" />
+                <goods-list :tabGoods="tabGoodsList[tabIndex]"/>
 
             </div>
         </scroll>
@@ -41,94 +41,21 @@
     import FeatureView from './childComps/FeatureView'
     import RecommendView from './childComps/RecommendView'
     import TabControl from '@/components/content/tabControl/TabControl'
-    import GoodsList from './childComps/goodsLIst'
+    import GoodsList from './childComps/GoodsLIst'
 
     import scroll from '@/components/common/scroll/scroll'
     import BackTop from '@/components/content/backTop/BackTop'
+
+    import api from '@/api'
 
     export default {
         name: 'Home',
         data() {
             return {
-                banners: [
-                    {
-                        link: "#",
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/180917_18l981g6clk33fbl3833ja357aaa0_750x390.jpg"
-                    },
-                    {
-                        link: "#",
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/180926_45fkj8ifdj4l824l42dgf9hd0h495_750x390.jpg"
-                    },
-                    {
-                        link: "#",
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/180926_31eb9h75jc217k7iej24i2dd0jba3_750x390.jpg",
-                    }
-                ],
-                features: [
-                    {
-                        link: "#",
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/180913_036dli57aah85cb82l1jj722g887g_225x225.png",
-                        title: "十点抢卷",
-                    },
-                    {
-                        link: "#",
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/180913_25e804lk773hdk695c60cai492111_225x225.png",
-                        title: "好物特卖",
-                    },
-                    {
-                        link: "#",
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/180913_387kgl3j21ff29lh04181iek48a6h_225x225.png",
-                        title: "内购福利",
-                    },
-                    {
-                        link: "#",
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/180913_8d4e5adi8llg7c47lgh2291akiec7_225x225.png",
-                        title: "初秋上新",
-                    },
-                ],
-                recommends: [
-                    {
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/200327_50ieadafgg13667jgf432hb2ijl9i_135x135.jpg_640x640.v1cAC.40.webp",
-                        title: "女装",
-                        link: "#",
-                    },
-                    {
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/190903_0572el03440fllf207k3g5kfe6g35_150x150.jpg_640x640.v1cAC.40.webp",
-                        title: "上衣",
-                        link: "#",
-                    },
-                    {
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/191021_2cagf3kgj81d6895k8571g8jbj30e_135x135.jpg_640x640.v1cAC.40.webp",
-                        title: "裤子",
-                        link: "#",
-                    },
-                    {
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/200327_1a3d2egbb3cagj7cg9jk8k5e24ck2_135x135.jpg_640x640.v1cAC.40.webp",
-                        title: "裙子",
-                        link: "#",
-                    },
-                    {
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/200525_7lj1302k99cbh22ad37aild2c9b5a_135x135.jpg_640x640.v1cAC.40.webp",
-                        title: "套装",
-                        link: "#",
-                    },
-                    {
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/200327_60hgbe9a54jd413df21l3gb468fa0_135x135.jpg_640x640.v1cAC.40.webp",
-                        title: "家居",
-                        link: "#",
-                    },
-                    {
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/200327_691e4fja6j2heh0egge060hfj7372_135x135.jpg_640x640.v1cAC.40.webp",
-                        title: "男装",
-                        link: "#",
-                    },
-                    {
-                        image: "https://s10.mogucdn.com/mlcdn/c45406/200327_0kllejc8c75ak5a942jd5f56ghh19_135x135.jpg_640x640.v1cAC.40.webp",
-                        title: "童装",
-                        link: "#",
-                    },
-                ],
-                tabItems: [{title: "流行", cate: "pop"}, {title: "新款", cate: "new"}, {title: "精选", cate: "sell"}],
+                banners: [],
+                features: [],
+                recommends: [],
+                tabItems: [],
                 tabGoodsList: [
                     {
                         cate: "pop",
@@ -289,33 +216,70 @@
             // 滑动事件回调监听
             scrollPosition(pos) {
                 // window.console.log(pos.y);
-                if (pos.y < -900) {
-                    this.isShowBackTop = true
-                } else {
-                    this.isShowBackTop = false
-                }
+                this.isShowBackTop = pos.y < -900;
             },
             // tab-control切换事件回调
-            tabChange(index){
+            tabChange(index) {
                 // 接受当前tab control 切换goodsList
                 this.tabIndex = index
             },
             // 滑动加载更多回调
-            loadMore(){
-                window.console.log("上拉加载更多....", this.tabGoodsList[this.tabIndex].cate)
+            loadMore() {
+                window.console.log("上拉加载更多....", this.tabGoodsList[this.tabIndex].cate);
 
                 // 必须得回调 finishPullUp方法才能下次加载更多
-                this.$refs.scroll.scroll.finishPullUp()
-            }
+                this.$refs.scroll.scroll.finishPullUp();
+                // 加载完图片后 重新计算高度 注意防抖处理
+                this.$refs.scroll.scroll.refresh()
 
+            },
+
+            // 加载首页banners
+            loadBanners() {
+                api.home.GetBanner().then(({data}) => {
+                    this.banners = data;
+                }).catch(({error}) => {
+                    window.console.log(error);
+                });
+            },
+            // 加载首页Features信息
+            loadFeatures() {
+                api.home.GetFeatures().then(({data}) => {
+                    this.features = data;
+                }).catch(({error}) => {
+                    window.console.log(error);
+                });
+            },
+            // 加载首页recommends信息
+            loadRecommends() {
+                api.home.GetRecommends().then(({data}) => {
+                    this.recommends = data;
+                }).catch(({error}) => {
+                    window.console.log(error);
+                });
+            },
+            // 加载首页Tab信息
+            loadTab() {
+                api.home.GetTab().then(({data}) => {
+                    this.tabItems = data;
+                }).catch(({error}) => {
+                    window.console.log(error);
+                });
+            },
         },
+        created(){
+            this.loadBanners();
+            this.loadFeatures();
+            this.loadRecommends();
+            this.loadTab();
+        }
+        ,
         mounted() {
 
+
         },
-        computed:{
-            // tabGoods(){
-            //     return this.tabGoodsList[this.$refs.tabItem.currentIndex]
-            // }
+        computed: {
+
         },
         components: {
             NavBar,
