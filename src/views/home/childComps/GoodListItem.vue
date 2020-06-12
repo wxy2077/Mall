@@ -1,13 +1,11 @@
 <template>
-    <div class="goodsItem">
-        <a :href="goods.link">
+    <div class="goodsItem" @click="goToDetail">
             <img :src="goods.image"/>
             <div class="goodsInfo">
-                <p>{{ goods.title }}</p>
-                <span class="price">{{ goods.price }}</span>
+                <p>{{ goods.title | cutTitle }}</p>
+                <span class="price">￥{{ goods.price }}</span>
                 <span class="collection">✨ {{ goods.collection }}</span>
             </div>
-        </a>
     </div>
 </template>
 
@@ -22,6 +20,19 @@
         },
         data() {
             return {}
+        },
+        methods:{
+            goToDetail(){
+                this.$router.push({path: "/detail"})
+            }
+        },
+        filters:{
+            // 过滤长标题
+            cutTitle(title){
+                if(title.length >10){
+                    return title.substring(1,15) + "..."
+                }
+            },
         }
     }
 </script>
