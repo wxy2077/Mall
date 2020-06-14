@@ -8,7 +8,7 @@
                      class="fixed"
                      @tabChange="tabChange"
                      ref="fixedTab"
-                     :tabItems="tabItems" />
+                     :tabItems="tabItems"/>
 
         <scroll class="wrapper"
                 ref="scroll"
@@ -28,9 +28,9 @@
                 <tab-control ref="tabControl"
                              :tabItems="tabItems"
                              @tabChange="tabChange"
-                             />
+                />
 
-                <goods-list :tabGoods="tabGoodsList[tabIndex]" />
+                <goods-list :tabGoods="tabGoodsList[tabIndex]"/>
 
             </div>
         </scroll>
@@ -47,171 +47,172 @@
     import FeatureView from './childComps/FeatureView'
     import RecommendView from './childComps/RecommendView'
     import TabControl from '@/components/content/tabControl/TabControl'
-    import GoodsList from './childComps/goodsLIst'
+    import GoodsList from './childComps/GoodsLIst'
 
     import scroll from '@/components/common/scroll/scroll'
     import BackTop from '@/components/content/backTop/BackTop'
+
+    import api from '@/api'
 
     export default {
         name: 'Home',
         data() {
             return {
-                return {
-                    banners: [],
-                    features: [],
-                    recommends: [],
-                    tabItems: [],
-                    tabGoodsList: [
-                        {
-                            cate: "pop",
-                            page: 1,
-                            goodsList: [
-                                {
-                                    link: "#",
-                                    image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
-                                    title: "古装",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
-                                    title: "古装",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
-                                    title: "古装",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s5.mogucdn.com/mlcdn/c45406/200518_4592lb50b55clglc3h76e4ij8c5f2_530x885.png_999x999.v1c0.100.webp",
-                                    title: "古装",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s5.mogucdn.com/mlcdn/c45406/200602_363j615cekblh5f79h493lijc4c87_607x1080.jpg_500x9999.v1c7E.70.webp",
-                                    title: "哈哈哈哈哈哈",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
-                                    title: "古装",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                            ],
-                        },
-                        {
-                            cate: "new",
-                            page: 1,
-                            goodsList: [
-                                {
-                                    link: "#",
-                                    image: "https://s5.mogucdn.com/mlcdn/c45406/200508_76idhj3c1all6jfi20429994ihci2_607x1080.jpg_400x9999.v1c7E.70.webp",
-                                    title: "通款new",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s5.mogucdn.com/mlcdn/c45406/200520_15ke638lbiaflljda4egbaile72f1_504x840.jpg_400x9999.v1c7E.70.webp",
-                                    title: "复古",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s11.mogucdn.com/mlcdn/c45406/200605_0igjh62f6a4bi92affg233gak526g_607x1080.jpg_400x9999.v1c7E.70.webp",
-                                    title: "丸子头",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s5.mogucdn.com/mlcdn/c45406/200518_4592lb50b55clglc3h76e4ij8c5f2_530x885.png_999x999.v1c0.100.webp",
-                                    title: "古装",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s5.mogucdn.com/mlcdn/c45406/200602_363j615cekblh5f79h493lijc4c87_607x1080.jpg_500x9999.v1c7E.70.webp",
-                                    title: "哈哈哈哈哈哈",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s5.mogucdn.com/mlcdn/c45406/200607_10g3605ddi2kc4fc7e9bjadl1hjkl_1080x1350.png_999x999.v1c0.100.webp",
-                                    title: "2233new",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                            ],
-                        },
-                        {
-                            cate: "sell",
-                            page: 1,
-                            goodsList: [
-                                {
-                                    link: "#",
-                                    image: "https://s11.mogucdn.com/mlcdn/c45406/200514_775j6cfkh671fdh59f3b0ffgc2b4c_900x1600.jpg_400x9999.v1c7E.70.webp",
-                                    title: "古装",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
-                                    title: "古装",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s11.mogucdn.com/mlcdn/c45406/200414_876ice98f43l98dgla6h6he8dgg4a_480x800.jpg_400x9999.v1c7E.70.webp",
-                                    title: "新款",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s5.mogucdn.com/mlcdn/c45406/200608_747f1b288jcbc5189i0ljjbfbdib4_1080x1620.jpg_400x9999.v1c7E.70.webp",
-                                    title: "最新款sell",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s5.mogucdn.com/mlcdn/c45406/200602_363j615cekblh5f79h493lijc4c87_607x1080.jpg_500x9999.v1c7E.70.webp",
-                                    title: "哈哈哈哈哈哈",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                                {
-                                    link: "#",
-                                    image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
-                                    title: "古装",
-                                    price: 79.00,
-                                    collection: 123,
-                                },
-                            ],
-                        },
-                    ],
-                    tabIndex: 0,
-                    scroll: null,
-                    isShowBackTop: false
-                }
+                banners: [],
+                features: [],
+                recommends: [],
+                tabItems: [],
+                tabGoodsList: [
+                    {
+                        cate: "pop",
+                        page: 1,
+                        goodsList: [
+                            {
+                                link: "#",
+                                image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
+                                title: "古装",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
+                                title: "古装",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
+                                title: "古装",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s5.mogucdn.com/mlcdn/c45406/200518_4592lb50b55clglc3h76e4ij8c5f2_530x885.png_999x999.v1c0.100.webp",
+                                title: "古装",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s5.mogucdn.com/mlcdn/c45406/200602_363j615cekblh5f79h493lijc4c87_607x1080.jpg_500x9999.v1c7E.70.webp",
+                                title: "哈哈哈哈哈哈",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
+                                title: "古装",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                        ],
+                    },
+                    {
+                        cate: "new",
+                        page: 1,
+                        goodsList: [
+                            {
+                                link: "#",
+                                image: "https://s5.mogucdn.com/mlcdn/c45406/200508_76idhj3c1all6jfi20429994ihci2_607x1080.jpg_400x9999.v1c7E.70.webp",
+                                title: "通款new",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s5.mogucdn.com/mlcdn/c45406/200520_15ke638lbiaflljda4egbaile72f1_504x840.jpg_400x9999.v1c7E.70.webp",
+                                title: "复古",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s11.mogucdn.com/mlcdn/c45406/200605_0igjh62f6a4bi92affg233gak526g_607x1080.jpg_400x9999.v1c7E.70.webp",
+                                title: "丸子头",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s5.mogucdn.com/mlcdn/c45406/200518_4592lb50b55clglc3h76e4ij8c5f2_530x885.png_999x999.v1c0.100.webp",
+                                title: "古装",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s5.mogucdn.com/mlcdn/c45406/200602_363j615cekblh5f79h493lijc4c87_607x1080.jpg_500x9999.v1c7E.70.webp",
+                                title: "哈哈哈哈哈哈",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s5.mogucdn.com/mlcdn/c45406/200607_10g3605ddi2kc4fc7e9bjadl1hjkl_1080x1350.png_999x999.v1c0.100.webp",
+                                title: "2233new",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                        ],
+                    },
+                    {
+                        cate: "sell",
+                        page: 1,
+                        goodsList: [
+                            {
+                                link: "#",
+                                image: "https://s11.mogucdn.com/mlcdn/c45406/200514_775j6cfkh671fdh59f3b0ffgc2b4c_900x1600.jpg_400x9999.v1c7E.70.webp",
+                                title: "古装",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
+                                title: "古装",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s11.mogucdn.com/mlcdn/c45406/200414_876ice98f43l98dgla6h6he8dgg4a_480x800.jpg_400x9999.v1c7E.70.webp",
+                                title: "新款",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s5.mogucdn.com/mlcdn/c45406/200608_747f1b288jcbc5189i0ljjbfbdib4_1080x1620.jpg_400x9999.v1c7E.70.webp",
+                                title: "最新款sell",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s5.mogucdn.com/mlcdn/c45406/200602_363j615cekblh5f79h493lijc4c87_607x1080.jpg_500x9999.v1c7E.70.webp",
+                                title: "哈哈哈哈哈哈",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                            {
+                                link: "#",
+                                image: "https://s11.mogucdn.com/mlcdn/c45406/200607_7ech8eldi4fhi8ha137k87797fikh_1080x1908.png_999x999.v1c0.100.webp",
+                                title: "古装",
+                                price: 79.00,
+                                collection: 123,
+                            },
+                        ],
+                    },
+                ],
+                tabIndex: 0,
+                scroll: null,
+                isShowBackTop: false
             }
+
         },
         methods: {
             //
@@ -236,7 +237,7 @@
                 this.isTabFixed = -pos.y >= this.$refs.tabControl.$el.offsetTop;
             },
             // tab-control切换事件回调
-            tabChange(index){
+            tabChange(index) {
                 // 接受当前tab control 切换goodsList
                 this.tabIndex = index;
                 // 统一两个子组件的下角标变量
@@ -286,7 +287,7 @@
             },
 
         },
-        created(){
+        created() {
             this.loadBanners();
             this.loadFeatures();
             this.loadRecommends();
@@ -295,7 +296,7 @@
         mounted() {
 
         },
-        computed:{
+        computed: {
             // tabGoods(){
             //     return this.tabGoodsList[this.$refs.tabItem.currentIndex]
             // }
