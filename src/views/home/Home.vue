@@ -69,6 +69,7 @@
                 isShowBackTop: false,
                 isTabFixed: false,
             }
+
         },
         methods: {
             //
