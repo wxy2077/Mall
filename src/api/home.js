@@ -29,7 +29,7 @@ export function GetRecommends() {
 }
 
 
-// 获取首页 tab信息 信息
+// 获取首页 tab信息
 export function GetTab() {
     return request(
         '/home/tab',
@@ -37,5 +37,13 @@ export function GetTab() {
     )
 }
 
+// 获取首页goods信息
+export function GetGoods(data={}) {
+    return request(
+        '/home/goods',
+        "get",
+        data
+    )
+}
 
 

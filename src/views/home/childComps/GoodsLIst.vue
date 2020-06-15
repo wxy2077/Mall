@@ -1,7 +1,7 @@
 <template>
     <div class="goodsLIst">
         <template v-if="tabGoods">
-            <good-list-item v-for="(item, index) in tabGoods.goodsList" :goods="item" :key="index"/>
+            <good-list-item v-for="(item, index) in tabGoods.item" :goods="item" :key="index"/>
         </template>
     </div>
 </template>

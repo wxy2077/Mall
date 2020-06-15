@@ -56,6 +56,12 @@
             // 跳转到顶部
             scrollTo(x, y, timeout=500){
                 this.scroll.scrollTo(x, y, timeout)
+            },
+            finishPullUp(){
+                this.scroll.finishPullUp()
+            },
+            refresh(){
+                this.scroll.refresh()
             }
         },
         mounted() {
