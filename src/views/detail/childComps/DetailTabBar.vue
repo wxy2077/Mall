@@ -6,7 +6,7 @@
         <div slot="center" class="nav-bar-text navBarCenter">
             <span v-for="(item, index) in navTitles"
                   :key="index"
-                  :class="{'active': currentIndex === index}"
+                  :class="{'active': tabBarIndex === index}"
                   @click="tabClick(index)"
             >
                 {{item }}
@@ -28,7 +28,7 @@
                 type: Array,
                 default: () => ["商品", "参数", "评论", "推荐"],
             },
-            currentIndex: {
+            tabBarIndex: {
                 type: Number,
                 default: 0
             }
@@ -38,7 +38,7 @@
         },
         methods:{
             tabClick(index){
-                this.currentIndex = index;
+                this.$emit("tabBarChange", index)
             }
         },
         components: {
