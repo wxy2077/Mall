@@ -4,12 +4,12 @@
 
         <!-- 标题 -->
         <h3 class="title">
-            【秋衣女】外穿打底衫女长袖中长款上衣春装新款小衫韩版学生宽松T恤
+            {{ title }}
         </h3>
         <!-- 价格 -->
         <div class="price-box">
-            <span class="price">¥29.9</span>
-            <span class="old-price">¥69.9</span>
+            <span class="price">{{ price | addMoney }}</span>
+            <span class="old-price">{{ oldPrice| addMoney }}</span>
             <span class="price-info bg-color">活动价</span>
         </div>
 
@@ -19,8 +19,25 @@
 <script>
     export default {
         name: "BaseInfo",
+        props: {
+            title: {
+                type: String,
+            },
+            price: {
+                type: Number,
+            },
+            oldPrice: {
+                type: Number,
+            }
+
+        },
         data() {
             return {}
+        },
+        filters:{
+            addMoney(data){
+                return `¥${data}`
+            }
         }
     }
 </script>
@@ -29,12 +46,14 @@
     .baseInfo {
         /*padding: 0 5px;*/
     }
-    .bg-color{
+
+    .bg-color {
         padding: 0 3px;
         color: #fff;
         border-radius: 5px;
         background-color: var(--color-high-text);
     }
+
     .title {
         margin-top: 8px;
         padding: 0 10px;

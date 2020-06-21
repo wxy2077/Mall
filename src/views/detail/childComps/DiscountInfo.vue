@@ -1,24 +1,40 @@
 <template>
     <!-- 折扣信息 -->
-    <div class="DiscountInfo">
+    <div class="DiscountInfo" v-if="discountVolume">
         <div class="discount-top">
             <span>优惠</span>
             <span class="bg-color">店铺优惠券</span>
-            <span>满99减10</span>
-            <span>领券></span>
+            <span v-for="(item, index) in discountVolume" :key="index">
+                {{ item }}
+            </span>
+            <span> 领券> </span>
         </div>
         <div class="discount-bottom">
             <span>促销</span>
             <span class="bg-color">满减</span>
-            <span>满2件立减2元，满3件立减3元</span>
+            <span v-for="(item, index) in discountActivity" :key="index">
+                {{ item }}
+            </span>
             <span>更多></span>
         </div>
     </div>
+
+
 </template>
 
 <script>
     export default {
         name: "DiscountInfo",
+        props:{
+            discountVolume:{
+                type: Array,
+                default: () => []
+            },
+            discountActivity:{
+                type: Array,
+                default: () => []
+            },
+        },
         data() {
             return {}
         }

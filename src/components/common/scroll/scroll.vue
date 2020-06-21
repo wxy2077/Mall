@@ -10,7 +10,7 @@
 
     export default {
         name: "scroll",
-        props:{
+        props: {
             probeType: {
                 type: Number,
                 default: 1
@@ -32,7 +32,7 @@
                 message: "我是scroll 的消息"
             }
         },
-        methods:{
+        methods: {
             __initScroll() {
                 // 1.初始化BScroll对象
                 if (!this.$refs.wrapper) return;
@@ -40,12 +40,12 @@
                     probeType: this.probeType,
                     click: true,
                     pullUpLoad: this.pullUpLoad
-                })
+                });
 
-                // 2.将监听事件回调
+                // 2.将监听滚动事件回调
                 this.scroll.on('scroll', pos => {
                     this.$emit('scroll', pos)
-                })
+                });
 
                 // 3.监听上拉到底部
                 this.scroll.on('pullingUp', () => {
@@ -53,19 +53,26 @@
                     this.$emit('pullingUp')
                 })
             },
-            // 跳转到顶部
-            scrollTo(x, y, timeout=500){
+            // 跳转位置
+            scrollTo(x, y, timeout = 500) {
                 this.scroll.scrollTo(x, y, timeout)
             },
-            finishPullUp(){
+            // 数据加载完毕 需要触发此事件 才能第二次加载
+            finishPullUp() {
                 this.scroll.finishPullUp()
             },
-            refresh(){
+            // 重新计算滚动高度
+            refresh() {
                 this.scroll.refresh()
             }
         },
         mounted() {
             this.__initScroll()
+        },
+        watch: {
+            data() {
+                setTimeout(this.refresh, 20)
+            }
         }
     }
 </script>

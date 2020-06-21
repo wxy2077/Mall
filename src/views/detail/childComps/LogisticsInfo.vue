@@ -1,9 +1,10 @@
 <template>
     <!-- 物流信息 -->
     <div class="LogisticsInfo">
-        <span><img :src='require("@/assets/img/common/yes.svg")'>退货补运费</span>
-        <span><img :src='require("@/assets/img/common/yes.svg")'>全国包邮</span>
-        <span><img :src='require("@/assets/img/common/yes.svg")'>七天无理由退货</span>
+        <template v-for="(item, index) in logisticsInfo">
+            <span :key="index"><img :src='require("@/assets/img/common/yes.svg")'>{{ item }}</span>
+
+        </template>
         <span> > </span>
     </div>
 </template>
@@ -11,6 +12,12 @@
 <script>
     export default {
         name: "LogisticsInfo",
+        props: {
+            logisticsInfo: {
+                type: Array,
+                default: () => []
+            }
+        },
         data() {
             return {}
         }
@@ -27,6 +34,7 @@
         justify-content: space-between;
         border-top: 8px solid rgba(100, 100, 100, .1);
     }
+
     .LogisticsInfo img {
         width: 13px;
         height: 13px;

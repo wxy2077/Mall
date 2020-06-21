@@ -21,9 +21,7 @@
 
 <style>
     @import "assets/css/base.css";
-    /*@import "assets/css/reset.less";*/
-    /*@import "assets/css/normalize.css";*/
-    /*@import "assets/style/common.less";*/
+
     #app {
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;

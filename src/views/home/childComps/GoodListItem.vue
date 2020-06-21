@@ -1,6 +1,6 @@
 <template>
     <div class="goodsItem" @click="goToDetail">
-            <img :src="goods.image"/>
+            <img :src="goods.image" @load="loadGoodsImage"/>
             <div class="goodsInfo">
                 <p>{{ goods.title | cutTitle }}</p>
                 <span class="price">￥{{ goods.price }}</span>
@@ -23,7 +23,10 @@
         },
         methods:{
             goToDetail(){
-                this.$router.push({path: "/detail"})
+                this.$router.push({path: "/detail", query: {goodsId: 123}})
+            },
+            loadGoodsImage(){
+                window.console.log("图片加载完毕!")
             }
         },
         filters:{

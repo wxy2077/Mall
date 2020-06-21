@@ -14,6 +14,7 @@
                 ref="scroll"
                 @scroll="scrollPosition"
                 @pullingUp="loadMore"
+                :data="tabGoodsList"
                 :pull-up-load="true"
                 :probe-type="3"
         >
@@ -58,12 +59,12 @@
         name: 'Home',
         data() {
             return {
-
                 banners: [],
                 features: [],
                 recommends: [],
                 tabItems: [],
                 tabGoodsList: [],
+                // 默认tabIndex
                 tabIndex: 0,
                 scroll: null,
                 isShowBackTop: false,
@@ -80,16 +81,9 @@
             // 滑动事件回调监听
             scrollPosition(pos) {
                 // window.console.log(-pos.y);
-                // if (pos.y < -900) {
-                //     this.isShowBackTop = true
-                // } else {
-                //     this.isShowBackTop = false
-                // }
                 // 1 简写 判断是否显示返回顶部按钮
                 this.isShowBackTop = pos.y < -900;
 
-
-                // this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop
                 // 2 获取 tabControl 到顶的高度
                 this.isTabFixed = -pos.y >= this.$refs.tabControl.$el.offsetTop;
             },
@@ -106,25 +100,9 @@
             loadMore() {
                 window.console.log("上拉加载更多....", this.tabGoodsList[this.tabIndex].tabName);
                 // 必须得回调 finishPullUp方法才能下次加载更多
-                let tabID = this.tabGoodsList[this.tabIndex].tabId;
-
-                let page = this.tabGoodsList[this.tabIndex].page + 1;
-                api.home.GetGoods({tabID, page}).then(({data}) => {
-                    window.console.log(data);
-                    // 把新增数据合并到源tab数组
-                    this.tabGoodsList[this.tabIndex].item.push.apply(this.tabGoodsList[this.tabIndex].item, data.item)
-                    // this.tabGoodsList = data;
-                    // this.tabGoodsList[this.tabIndex]
-                    this.tabGoodsList[this.tabIndex].page += 1;
-
-                    this.$refs.scroll.finishPullUp();
-                }).catch(({error}) => {
-                    window.console.log(error);
-                });
-
-
+                this.loadGoodsList();
                 // 所有图片加一个加载完成事件(事件总线), 然后防抖处理 加载完图片后 重新计算高度 注意防抖处理
-                this.$refs.scroll.refresh()
+                // this.$refs.scroll.refresh()
             },
             // 加载首页banners
             loadBanners() {
@@ -166,7 +144,24 @@
                     window.console.log(error);
                 });
             },
+            // 记载更多分类
+            loadGoodsList(){
 
+                let tabId = this.tabGoodsList[this.tabIndex].tabId;
+                let page = this.tabGoodsList[this.tabIndex].page + 1;
+                api.home.GetGoods({tabId, page}).then(({data}) => {
+                    window.console.log(data);
+                    // 把新增数据合并到源tab数组
+                    this.tabGoodsList[this.tabIndex].item.push.apply(this.tabGoodsList[this.tabIndex].item, data.item)
+                    // this.tabGoodsList = data;
+                    // this.tabGoodsList[this.tabIndex]
+                    this.tabGoodsList[this.tabIndex].page += 1;
+
+                    this.$refs.scroll.finishPullUp();
+                }).catch(({error}) => {
+                    window.console.log(error);
+                });
+            }
 
         },
         created() {

@@ -1,3 +1,8 @@
+/**
+ *
+ *
+ * 请求首页内容
+ * */
 
 
 import request from '@/utils/request'

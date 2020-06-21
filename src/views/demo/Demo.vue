@@ -22,6 +22,9 @@
 </template>
 
 <script>
+
+    import {debounce} from '../../utils/public.js'
+
     export default {
         name: 'Demo',
         data() {
@@ -48,24 +51,32 @@
             },
             btnClick() {
                 window.console.log("点击了");
-                this.debounce(this.pageAdd, 3000)
+                debounce(function () {
+                    this.currentPage +=1
+                },2000);
+                // window.console.log(this.currentPage)
             },
             pageAdd() {
-                window.console.log("页面+1")
+                window.console.log("页面+1");
                 this.currentPage += 1
             },
             // 防抖函数
             debounce(func, delay) {
-                let timer = null;
+                var timer = null;
                 return function () {
-                    let context = this;
-                    if (timer) clearTimeout(timer);
+                    var context = this;
+                    if (timer) {
+                        window.console.log("清除定时器");
+                        clearTimeout(timer)
+                    }
+
                     timer = setTimeout(() => {
                         func.apply(context)
                     }, delay)
                 }
+            },
 
-            }
+
         },
     }
 </script>

@@ -2,15 +2,16 @@
 
     <!-- 销售信息 -->
     <div class="SaleInfo">
-        <span>销量:1031</span>
-        <span>收藏:100人</span>
-        <span>72小时发货</span>
+        <span>销量:{{ salesVolume }}</span>
+        <span>收藏:{{ salesCollect }}人</span>
+        <span>{{ salesDeliver }}</span>
     </div>
 </template>
 
 <script>
     export default {
         name: "SaleInfo",
+        props:["salesVolume", "salesCollect", "salesDeliver"],
         data() {
             return {}
         }

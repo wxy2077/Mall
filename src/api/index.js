@@ -5,10 +5,11 @@
  *
  */
 import * as home from './home';
+import * as detail from './detail';
 
 
 export default {
 
-    home, //登陆登出
-
+    home,    //首页
+    detail,  // 详情页
 }

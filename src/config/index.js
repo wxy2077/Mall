@@ -6,7 +6,7 @@
  * */
 
 export let appConfig = {
-    development: 'https://www.charmcode.cn',
+    development: 'http://127.0.0.1:8010',
     production: '',
     cookieTime: {
         refreshToken: 60 * 60 * 24 * 7,  // refreshToken  存在7天

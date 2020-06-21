@@ -3,9 +3,9 @@
     <div class="detailSwiper">
         <swiper v-if="banners.length !== -1">
             <SwiperItem v-for="(item,index) in banners" :key="index">
-                <a :href="item.link" class="swiperImg">
-                    <img :src="item.image" alt="">
-                </a>
+                <div class="swiperImg">
+                    <img :src="item">
+                </div>
             </SwiperItem>
         </swiper>
     </div>

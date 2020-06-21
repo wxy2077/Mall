@@ -1,6 +1,6 @@
 <template>
     <nav-bar class="DetailTabBar">
-        <div slot="left" class="nav-bar-text">
+        <div slot="left" class="nav-bar-text" @click="backClick">
             <img class="iconBarBack" :src='require("@/assets/img/common/back.svg")'>
         </div>
         <div slot="center" class="nav-bar-text navBarCenter">
@@ -26,7 +26,7 @@
         props: {
             navTitles: {
                 type: Array,
-                default: () => ["商品", "参数", "评论", "推荐"],
+                default: () => ["商品", "评论", "详情", "参数"],
             },
             tabBarIndex: {
                 type: Number,
@@ -39,6 +39,9 @@
         methods:{
             tabClick(index){
                 this.$emit("tabBarChange", index)
+            },
+            backClick(){
+                this.$router.push({path: "/home"})
             }
         },
         components: {
