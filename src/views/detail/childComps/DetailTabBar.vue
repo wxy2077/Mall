@@ -41,7 +41,7 @@
                 this.$emit("tabBarChange", index)
             },
             backClick(){
-                this.$router.push({path: "/home"})
+                this.$router.go(-1)
             }
         },
         components: {

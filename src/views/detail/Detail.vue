@@ -168,6 +168,7 @@
             CommentInfo,     // 评论信息
             ShopInfo,        // 店铺信息
             GoodsDisplay,    // 商品展示
+            // 参数什么的就不写了
             BottomBar,
         },
         created() {

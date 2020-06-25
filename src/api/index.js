@@ -6,10 +6,12 @@
  */
 import * as home from './home';
 import * as detail from './detail';
+import * as category from './category';
 
 
 export default {
 
     home,    //首页
     detail,  // 详情页
+    category,  // 详情页
 }

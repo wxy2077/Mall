@@ -8,6 +8,7 @@ import { appConfig } from '@/config'
 
 export default function concatUrl(e) {
     let url;
-    url = `${appConfig[process.env.NODE_ENV]}/api/leaf/mall${e}`;
+    // url = `${appConfig[process.env.NODE_ENV]}/api/leaf/mall${e}`;
+    url = `${appConfig[process.env.NODE_ENV]}/api/v1${e}`;
     return url;
 }
