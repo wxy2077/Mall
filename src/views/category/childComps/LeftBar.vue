@@ -5,7 +5,7 @@
              v-for="(item, index) in cateList"
              :key="index"
              :class="{'active': currentCate===index}"
-             @click="cateChange(index, item.cate_id)"
+             @click="cateChange(index)"
         >
             {{ item.cate_name }}
         </div>
@@ -30,8 +30,8 @@
             return {}
         },
         methods:{
-            cateChange(index, cateId){
-                this.$emit("cateChange", index, cateId)
+            cateChange(index){
+                this.$emit("cateChange", index)
             }
         }
     }

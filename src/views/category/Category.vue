@@ -9,7 +9,7 @@
                     class="left-bar"
                     :cate-list="cateList"
                     :current-cate="currentCate"
-                    @cateChange="cateChange"
+                    @cateChange="changeCate"
             />
             <div class="content-view">
                 <tab-bar :current-tab="currentTab"
@@ -18,10 +18,12 @@
                 />
 
                 <scroll id="tab-content"
+                        ref="scroll"
+                        @pullingUp="loadMore"
                         :pull-up-load="true"
                         :probe-type="3">
                     <div class="scroll-content">
-                        <goods-list :tab-goods="tabGoods"/>
+                        <goods-list :tab-goods="goodsInfo"/>
                     </div>
 
                 </scroll>
@@ -52,7 +54,11 @@
                 cateList: [],
                 currentTab: 0,
                 tabList: [],
-                tabGoods: {},
+
+                // 记录当前分类信息
+                goodsInfo: [],
+                // 存储页面信息
+                tempGoods: {},
             }
         },
         components: {
@@ -63,45 +69,98 @@
             GoodsList
         },
         methods: {
-            cateChange(index, cateId) {
-                this.currentCate = index;
-                window.console.log(cateId)
+            // 加载左侧分类Cate
+            loadCate() {
+                api.category.getCategory().then(({data}) => {
+                    this.cateList = data;
+                    // 加载分类tab 默认第一页
+                    this.loadTab(this.cateList[this.currentCate].cate_id, 1)
+                })
             },
-            changeTab(index, tabId) {
+
+            // 加载分类tab
+            loadTab(cateId, page) {
+                api.category.getTabBar({cateId}).then(({data}) => {
+                    this.tabList = data;
+
+                    this.loadGoods(this.tabList[this.currentTab].tab_id, page)
+
+                })
+            },
+
+            // 加载商品
+            loadGoods(tabId, page) {
+                api.category.getGoods({tabId, page}).then(({data}) => {
+
+                    // 当前分页 +1
+                    page += 1;
+                    // 判断是否有 tempGoods 以tabId为key的对象，没有就赋空对象
+                    if (!this.tempGoods[tabId]) this.tempGoods[tabId] = {};
+                    // 记录当前页码
+                    this.tempGoods[tabId]['page'] = page;
+
+                    // 判断是否有记录此商品
+                    if (!this.tempGoods[tabId]['goods']) {
+                        // 没有 说明第一页 赋值当前的商品列表
+                        this.tempGoods[tabId]['goods'] = data.items
+                    } else {
+                        // 有 说明不是第一页，追加新的商品列表
+                        this.tempGoods[tabId]['goods'].push.apply(this.tempGoods[tabId]['goods'], data.items)
+                    }
+                    window.console.log("当前分类", this.tempGoods);
+
+                    // 触发watch
+                    this.goodsInfo = this.tempGoods[tabId]['goods'];
+                    //
+                    this.$refs.scroll.finishPullUp();
+                })
+            },
+            // 切换tab
+            changeTab: function (index) {
                 this.currentTab = index;
-                window.console.log(tabId)
+                // 切换tab 默认请求第一页
+                this.loadGoods(this.tabList[this.currentTab].tab_id, 1)
             },
-            loadGoods(cateId, tabId, page) {
-                api.category.getGoods({cateId, tabId, page})
-            },
-            // 第一次进来时加载分类
-            firstCategory() {
-                return api.category.getCategory()
-            },
-            firstTab(cateId) {
-                return api.category.getTabBar({cateId})
-            },
-            firstGoods(cateId, tabId) {
-                return api.category.getGoods({cateId, tabId})
-            },
-            // 使用async异步转同步确保 分类加载 读取第一个分类 获取对应的tabBar
-            async firstLoad() {
-                // window.console.log(this.cateList);
-                const cateData = await this.firstCategory();
-                this.cateList = cateData.data;
 
-                const tabBar = await this.firstTab(this.cateList[this.currentCate].cate_id);
-                this.tabList = tabBar.data;
+            // 切换cate
+            changeCate(index) {
+                this.currentCate = index;
+                window.console.log(this.cateList[this.currentCate].cate_id, "当前分类");
+                // 切换cate 也是默认请求第一页
+                this.loadTab(this.cateList[this.currentCate].cate_id, 1)
 
-                const currentGoods = await this.firstGoods(this.cateList[this.currentCate].cate_id,
-                    this.tabList[0].tab_id
-                );
-                this.tabGoods = currentGoods.data;
-            }
+            },
+
+            // 加载更多
+            loadMore() {
+
+                let tabId = this.tabList[this.currentTab].tab_id;
+                let page = this.tempGoods[this.tabList[this.currentTab].tab_id]['page'];
+
+                this.loadGoods(tabId, page);
+                window.console.log(tabId, "加载更多...");
+
+            },
+
         },
+
         created() {
-            this.firstLoad();
+            // 首次 请求分类
+            this.loadCate()
+
         },
+        watch: {
+            // 监听 goodsInfo 变化
+            goodsInfo() {
+                window.console.log("触发了");
+                if (this.tempGoods[this.tabList[this.currentTab]]) {
+                    return this.tempGoods[this.tabList[this.currentTab].tab_id]['goods']
+
+                } else {
+                    return []
+                }
+            }
+        }
 
     }
 </script>

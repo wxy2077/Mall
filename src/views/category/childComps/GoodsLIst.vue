@@ -1,7 +1,7 @@
 <template>
     <div class="goodsLIst">
         <template v-if="tabGoods">
-            <good-list-item v-for="(item, index) in tabGoods.items" :goods="item" :key="index"/>
+            <good-list-item v-for="(item, index) in tabGoods" :goods="item" :key="index"/>
         </template>
 
 
@@ -16,8 +16,8 @@
         name: "goodsLIst",
         props: {
             tabGoods: {
-                type: Object,
-                default: () => {}
+                type: Array,
+                default: () => []
             }
         },
         data() {

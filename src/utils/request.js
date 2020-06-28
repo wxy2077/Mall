@@ -100,13 +100,13 @@ service.interceptors.response.use(
 );
 
 
-export const request = (url, method = 'post', data = {}) => {
+export const request = (url, method = 'POST', data = {}) => {
     let requestUrl = concatUrl(url);
 
     window.console.log(requestUrl);
 
     // 参数配置 如果是get方法就 设置成params 参数， 其他则设置成data参数
-    let reConfig = method == "get" ? {
+    let reConfig = method.toLocaleUpperCase() === "GET" ? {
         method,
         url: requestUrl,
         params: data

@@ -5,7 +5,7 @@
               v-for="(item, index) in tabList"
               :class="{'active': currentTab === index}"
               :key="index"
-              @click="changeTab(index, item.tab_id)"
+              @click="changeTab(index)"
         >
                 {{ item.tab_name }}
         </span>
@@ -31,8 +31,8 @@
             return {}
         },
         methods:{
-            changeTab(index, tabId){
-                this.$emit("changeTab", index, tabId)
+            changeTab(index){
+                this.$emit("changeTab", index)
             }
         }
     }
