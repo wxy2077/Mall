@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="bar-item button-item">
-           <div class="addCar">加入购物车</div>
+           <div class="addCar" @click="addShopCart">加入购物车</div>
            <div class="rightBuy">立即购买</div>
         </div>
 
@@ -35,6 +35,12 @@
         data() {
             return {
 
+            }
+        },
+        methods:{
+            addShopCart(){
+                // 添加到购物车
+                this.$emit("addShopCart")
             }
         }
     }

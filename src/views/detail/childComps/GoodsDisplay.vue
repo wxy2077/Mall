@@ -7,7 +7,6 @@
             {{ goodsDesc }}
         </div>
         <h3>穿着效果</h3>
-        <p>质量好不起球</p>
         <div class="goods-img" v-for="(item, index) in goodsImages" :key="index">
             <img :src="item"/>
         </div>
@@ -43,6 +42,14 @@
     }
     .goods-info, h3, p{
         padding: 10px 10px;
+    }
+    .goods-img{
+        height: 60vh;
+        width: 100vw;
+    }
+    .goods-img img{
+        width: 100%;
+        height: 100vh;
     }
     .lineBar--dot{
         display: inline-block;

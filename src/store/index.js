@@ -5,11 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        // 演示demo
         counter: 123,
         info: {
             name: "卡卡罗特",
             identity: "SuperSaiaMan",
-        }
+        },
+
+        // 购物车列表
+        shopList: [],
+
     },
     mutations: {
         // 默认有一个state回调参数
@@ -47,7 +52,64 @@ export default new Vuex.Store({
 
             // 响应式删除 对象       属性
             Vue.delete(state.info, params)
+        },
+
+        // 添加到购物车
+        addShopList(state, params){
+            // 判断之前是否添加过
+            const oldInfo = state.shopList.find(item => item.goodsId === params.goodsId);
+            // 如果没有
+            if(!oldInfo){
+                // 计数为1
+                params.count = 1;
+                // 默认被选中
+                params.checked = true;
+                state.shopList.push(params);
+            }else{
+                // 如果有 则+1
+                oldInfo.count += 1
+            }
+
+            // window.console.log(state.shopList)
+        },
+        // 购物商品减少
+        reduceShop(state, params){
+            let currentIndex = state.shopList.indexOf(params);
+            if(currentIndex !== -1){
+                if(state.shopList[currentIndex].count > 1){
+                    state.shopList[currentIndex].count -= 1
+                }
+                // else{
+                //     state.shopList.splice(currentIndex, 1)
+                // }
+            }
+        },
+        // 改变单个商品选中状态
+        changeChecked(state, params){
+            // 查找当前对象
+            const oldInfo = state.shopList.find(item => item.goodsId === params.goodsId);
+            //
+            if(oldInfo){
+                oldInfo.checked = !oldInfo.checked
+            }
+        },
+
+        // 全选/取消全选
+        choiceAll(state, choice){
+            state.shopList.forEach(el => {
+                el['checked'] = choice
+            })
+        },
+
+        // 删除   反向选择没选中的 重新赋值
+        delChoice(state){
+            state.shopList = state.shopList.filter(function(el){
+                return !el.checked;
+            })
         }
+
+
+
     },
     actions: {
         // 默认 context 上下文 参数回调
@@ -70,6 +132,13 @@ export default new Vuex.Store({
         // }
         //
         // }
+
+        cartList(state) {
+            return state.shopList
+        },
+        cartCount(state) {
+            return state.shopList.length
+        }
     },
     modules: {}
 })

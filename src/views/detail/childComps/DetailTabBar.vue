@@ -1,6 +1,6 @@
 <template>
     <nav-bar class="DetailTabBar">
-        <div slot="left" class="nav-bar-text" @click="backClick">
+        <div slot="left" class="nav-bar-icon" @click="backClick">
             <img class="iconBarBack" :src='require("@/assets/img/common/back.svg")'>
         </div>
         <div slot="center" class="nav-bar-text navBarCenter">
@@ -58,11 +58,14 @@
         background-color: #fff;
         color: #666666;
     }
+    .nav-bar-icon{
+        display: flex;
+        justify-content: center;
+    }
 
     .iconBarBack {
         width: 25px;
         height: 25px;
-        margin-left: 10px;
     }
     .navBarCenter span{
         margin: 0 10px;

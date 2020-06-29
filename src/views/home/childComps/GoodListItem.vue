@@ -23,7 +23,12 @@
         },
         methods:{
             goToDetail(){
-                this.$router.push({path: "/detail", query: {goodsId: 123}})
+                // 后台商品详情就存了三条详情 id 为123 456 789
+                let mockGoodsIdList = [123, 456, 789];
+
+                let mockGoodsId = mockGoodsIdList[Math.floor(Math.random() * mockGoodsIdList.length)];
+
+                this.$router.push({path: "/mall/app/detail", query: {goodsId: mockGoodsId}})
             },
             loadGoodsImage(){
                 window.console.log("图片加载完毕!")

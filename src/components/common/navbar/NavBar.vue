@@ -21,12 +21,13 @@
         height: 43px;
         background-color: var(--color-tint);
         color: #fff;
+        line-height: 43px;
+        text-align: center;
     }
     .nav-center{
         flex: 1;
         font-size: 16px;
-        line-height: 43px;
-        text-align: center;
+
     }
     .nav-left, .nav-right{
         width: 50px;

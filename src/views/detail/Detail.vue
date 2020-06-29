@@ -47,7 +47,8 @@
             </div>
         </scroll>
 
-        <BottomBar/>
+        <!-- 底部按钮样式 -->
+        <BottomBar @addShopCart="addShopCart" />
     </div>
 </template>
 
@@ -117,7 +118,7 @@
             },
             // 监听滚动
             scrollPosition(position) {
-                // 更具位置显示 tabBar颜色
+                // 根据位置显示 tabBar颜色
                 if (-position.y < 200) {
                     this.tabBarIndex = 0
                 } else if (-position.y >= this.$refs.comment.$el.offsetTop && -position.y < this.$refs.goodsDisplay.$el.offsetTop) {
@@ -153,6 +154,18 @@
                 }).catch(({error}) => {
                     window.console.log(error)
                 })
+            },
+            // 添加到购物车
+            addShopCart(){
+                // 购物车基本信息
+                const shopObj = {
+                    goodsId: this.goodsId,
+                    image: this.banners[0],
+                    title: this.title,
+                    price: this.price
+                };
+                window.console.log("添加到购物车", shopObj);
+                this.$store.commit("addShopList", shopObj)
             }
         },
         mixin: [backTopMixin],
