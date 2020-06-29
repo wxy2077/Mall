@@ -15,34 +15,34 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        redirect: '/home'
+        redirect: '/mall/app/home'
     },
     {
-        path: '/home',
+        path: '/mall/app/home',
         component: Home,
         meta:{
 
         }
     },
     {
-        path: '/category',
+        path: '/mall/app/category',
         component: Category
     },
     {
-        path: '/cart',
+        path: '/mall/app/cart',
         component: Cart
     },
     {
-        path: '/profile',
+        path: '/mall/app/profile',
         component: Profile
     },
     {
-        path: '/demo',
+        path: '/mall/app/demo',
         name: "Demo",
         component: () => import('@/views/demo/Demo'),
     },
     {
-        path: '/detail',
+        path: '/mall/app/detail',
         name: "Detail",
         component: () => import('@/views/detail/Detail'),
     }
