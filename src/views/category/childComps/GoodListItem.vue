@@ -29,7 +29,7 @@
 
                 let mockGoodsId = mockGoodsIdList[Math.floor(Math.random() * mockGoodsIdList.length)];
 
-                this.$router.push({path: "/mall/app/detail", query: {goodsId: mockGoodsId}})
+                this.$router.push({path: "/detail", query: {goodsId: mockGoodsId}})
             },
             loadGoodsImage(){
                 window.console.log("图片加载完毕!")

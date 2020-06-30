@@ -15,34 +15,34 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        redirect: '/mall/app/home'
+        redirect: '/home'
     },
     {
-        path: '/mall/app/home',
+        path: '/home',
         component: Home,
         meta:{
 
         }
     },
     {
-        path: '/mall/app/category',
+        path: '/category',
         component: Category
     },
     {
-        path: '/mall/app/cart',
+        path: '/cart',
         component: Cart
     },
     {
-        path: '/mall/app/profile',
+        path: '/profile',
         component: Profile
     },
     {
-        path: '/mall/app/demo',
+        path: '/demo',
         name: "Demo",
         component: () => import('@/views/demo/Demo'),
     },
     {
-        path: '/mall/app/detail',
+        path: '/detail',
         name: "Detail",
         component: () => import('@/views/detail/Detail'),
     }
@@ -50,6 +50,7 @@ const routes = [
 
 // 3.创建路由对象
 const router = new VueRouter({
+    base: '/app/mall',
     routes,
     mode: 'history'
 });
