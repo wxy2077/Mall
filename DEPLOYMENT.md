@@ -106,6 +106,14 @@ nginx -s reload
 
 ```
 
+## 个人项目部署地址
+项目进度
+- 完成首页，分类页，购物车等页面，还差个人中心(2020/06/30)
+
+https://www.charmcode.cn/app/mall/home
+
+> PC端, Google浏览器需要F12 点击切换移动设备 
+
 
 
 
