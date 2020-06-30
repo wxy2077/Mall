@@ -20,7 +20,8 @@
         >
             <div>
                 <!-- 轮播图 -->
-                <home-swiper :banners="banners"/>
+                <!--<home-swiper :banners="banners"/>-->
+                <swiper-view :banners="banners"/>
 
                 <feature-view :features="features"/>
 
@@ -44,7 +45,8 @@
 
 <script>
     import NavBar from '@/components/common/navbar/NavBar'
-    import HomeSwiper from './childComps/HomeSwiper'
+    // import HomeSwiper from './childComps/HomeSwiper'
+    import SwiperView from './childComps/SwiperView'
     import FeatureView from './childComps/FeatureView'
     import RecommendView from './childComps/RecommendView'
     import TabControl from '@/components/content/tabControl/TabControl'
@@ -181,7 +183,8 @@
         },
         components: {
             NavBar,
-            HomeSwiper,
+            // HomeSwiper,
+            SwiperView,
             FeatureView,
             RecommendView,
             TabControl,
@@ -212,12 +215,6 @@
         font-size: 16px;
         color: #ffffff;
     }
-
-    /* tab-control固定高度时停住 */
-    /*.tab-control{*/
-    /*position: sticky;*/
-    /*top: 43px;*/
-    /*}*/
 
     .wrapper {
         position: absolute;
