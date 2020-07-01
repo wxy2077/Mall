@@ -164,7 +164,7 @@
                     title: this.title,
                     price: this.price
                 };
-                window.console.log("添加到购物车", shopObj);
+                this.$toast("已添加到购物车", "success", 2000);
                 this.$store.commit("addShopList", shopObj)
             }
         },

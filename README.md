@@ -1,6 +1,11 @@
 # Mall
 > 练习Vue时写的移动端商城项目,目前已经部署到线上。
 
+## 对应API服务
+> 使用Python FastAPI构建
+
+[FastAPI服务地址](https://github.com/CoderCharm/MallAPI): https://github.com/CoderCharm/MallAPI
+
 项目进度
 - 完成首页，分类页，购物车等页面，还差个人中心(2020/06/30)
 
