@@ -90,6 +90,7 @@
                 }
             },
             delChoice(){
+                this.$toast("已删除");
                 this.$store.commit("delChoice")
             }
         }

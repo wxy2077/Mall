@@ -16,7 +16,7 @@
         </div>
 
         <div class="bar-item">
-            <img :src='require("@/assets/img/common/heart.svg")'>
+            <img :src='require("@/assets/img/common/un_heart.svg")'>
             <div>
                 收藏
             </div>
@@ -25,7 +25,6 @@
            <div class="addCar" @click="addShopCart">加入购物车</div>
            <div class="rightBuy">立即购买</div>
         </div>
-
     </div>
 </template>
 

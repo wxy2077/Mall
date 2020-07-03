@@ -1,61 +1,65 @@
 <template>
     <div class="Profile">
-        <!--<h2>个人中心</h2>-->
+        <nav-bar>
+            <div slot="center">个人中心</div>
+            <div slot="right" class="nav-bar-icon">
+                <img class="setting" :src='require("@/assets/img/common/setting.svg")'/>
+            </div>
+        </nav-bar>
 
-        <button @click="clickNormal"> 普通消息 </button>
-        <button @click="clickSuc"> 成功 </button>
-        <button @click="clickWar"> 警告 </button>
-        <button @click="clickFail"> 失败 </button>
+        <user-view />
 
+        <feature-view/>
 
-        <!--<cust-toast-->
-                <!--message="这是传进来的"-->
-                <!--:showToast="showToast"-->
-                <!--type="success"-->
-        <!--/>-->
+        <order-view/>
+
+        <tab-view/>
+
     </div>
 
 </template>
 
 <script>
-    // import Toast from '@/components/common/toast/Toast'
-    // import CustToast from '@/components/common/toast/CustToast'
+    import NavBar from '@/components/common/navbar/NavBar'
+
+    import UserView from './childComps/UserView'
+    import FeatureView from './childComps/FeatureView'
+    import OrderView from './childComps/OrderView'
+    import TabView from './childComps/TabView'
 
     export default {
         name: 'Profile',
         data() {
             return {
-                showToast: true,
-                typeToast: "normal",
-                toastMessage: "弹窗提示"
+
             }
         },
         methods:{
-            clickNormal(){
 
-                this.$toast("测试普通")
-            },
-            clickSuc(){
-                this.$toast("测试成功", "success", 5000)
-            },
-            clickWar(){
-                this.$toast("测试警告", "warning")
-            },
-            clickFail(){
-                this.$toast("测试失败", "fail")
-            }
 
         },
         components: {
-            // Toast,
-            // CustToast
+            NavBar,
+            UserView,
+            FeatureView,
+            OrderView,
+            TabView
         }
     }
 </script>
 
 <style scoped>
-    button{
-        margin: 20px;
+    .Profile{
+    }
+    .nav-bar-icon{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .setting{
+        width: 25px;
+        height: 25px;
     }
 
 </style>
